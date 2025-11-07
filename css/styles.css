@@ -1,0 +1,28 @@
+body {
+  background: #f7fbff;
+}
+
+h1 {
+  border-bottom: 4px solid rgba(0,0,0,0.1);
+  margin-bottom: 0;
+}
+
+hr {
+  width: 70%;
+  margin: 1.25rem auto;
+  opacity: 0.25;
+}
+
+#totalScore {
+  font-weight: 700;
+}
+
+#congratsMsg {
+  color: #198754;
+  margin-top: .9rem;
+}
+
+img {
+  height: 25px;
+  vertical-align: middle;
+}
