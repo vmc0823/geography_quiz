@@ -8,10 +8,11 @@ var attempts = Number(localStorage.getItem("total_attempts")) || 0;
 displayQ4Choices();
 displayQ6Choices();
 displayQ7Choices();
+displayQ9Choices();
 
 //functions
 function displayQ4Choices(){
-	let q4ChoicesArray = ["Maine", "Rhode Island", "Maryland", "Delware"];
+	let q4ChoicesArray = ["Maine", "Rhode Island", "Maryland", "Delaware"];
     q4ChoicesArray = _.shuffle(q4ChoicesArray);
 	for (let i=0; i < q4ChoicesArray.length; i++) {
 		document.querySelector("#q4Choices").innerHTML += ` <input type="radio" name="q4" id= "${q4ChoicesArray[i]}"
@@ -21,27 +22,62 @@ function displayQ4Choices(){
 }
 
 function displayQ6Choices() {
-  let q6ChoicesArray = ["Atlantic", "Pacific", "Indian", "Arctic"]; // correct = Pacific
+  let q6ChoicesArray = ["Atlantic","Pacific","Indian","Arctic"];
   q6ChoicesArray = _.shuffle(q6ChoicesArray);
   for (let i = 0; i < q6ChoicesArray.length; i++) {
+    const id = `q6-${q6ChoicesArray[i]}`;
     document.querySelector("#q6Choices").innerHTML +=
-      ` <input type="radio" name="q6" id="${q6ChoicesArray[i]}"
-          value="${q6ChoicesArray[i]}"> 
-        <label for="${q6ChoicesArray[i]}">${q6ChoicesArray[i]}</label>`;
+      `<div class="form-check text-start">
+         <input class="form-check-input" type="radio" name="q6" id="${id}" value="${q6ChoicesArray[i]}">
+         <label class="form-check-label" for="${id}">${q6ChoicesArray[i]}</label>
+       </div>`;
   }
 }
 
 function displayQ7Choices() {
-  let q7ChoicesArray = ["Atlantic", "Pacific", "Indian", "Arctic"]; // correct = Atlantic
+  let q7ChoicesArray = ["Atlantic","Pacific","Indian","Arctic"];
   q7ChoicesArray = _.shuffle(q7ChoicesArray);
+
+  const c = document.querySelector("#q7Choices");
+  c.innerHTML = "";
   for (let i = 0; i < q7ChoicesArray.length; i++) {
-    const id = q7ChoicesArray[i] + "-east"; //avoid id conflicts with q6
-    document.querySelector("#q7Choices").innerHTML +=
-      ` <input type="radio" name="q7" id="${q7ChoicesArray[i]}-east"
-          value="${q7ChoicesArray[i]}"> 
-        <label for="${q7ChoicesArray[i]}-east">${q7ChoicesArray[i]}</label>`;
+    const val = q7ChoicesArray[i];
+    const id  = `q7-${val}`;
+
+    // Bootstrap "btn-check" + label-as-button
+    c.innerHTML += `
+      <input type="radio" class="btn-check" name="q7" id="${id}" value="${val}" autocomplete="off">
+      <label class="btn btn-outline-primary rounded-pill px-3" for="${id}">
+        🌊 ${val}
+      </label>
+    `;
   }
 }
+
+function displayQ9Choices() {
+  let q9ChoicesArray = ["Madrid","Barcelona","Valencia","Seville"];
+  q9ChoicesArray = _.shuffle(q9ChoicesArray);
+
+  const c = document.querySelector("#q9Choices");
+  c.innerHTML = "";
+  for (let i = 0; i < q9ChoicesArray.length; i++) {
+    const val = q9ChoicesArray[i];
+    c.innerHTML += `
+      <button type="button" class="btn btn-outline-primary q9btn px-3" data-val="${val}">
+        🏰 ${val}
+      </button>
+    `;
+  }
+
+  c.addEventListener("click", (e) => {
+    const btn = e.target.closest(".q9btn");
+    if (!btn) return;
+    c.querySelectorAll(".q9btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    document.querySelector("#q9Value").value = btn.dataset.val; // hidden input
+  });
+}
+
 
 function isFormValid(){
     let isValid= true;
@@ -77,12 +113,12 @@ function gradeQuiz(){
  score = 0;
  let q1Response = document.querySelector("#q1").value.toLowerCase();;
  let q2Response = document.querySelector("#q2").value;
- let q4Response = document.querySelector("input[name=q4]:checked").value || "";
+ let q4Response = document.querySelector("input[name=q4]:checked")?.value || "";
  let q5Response = (document.querySelector("#q5").value || "").trim().toLowerCase();
  let q6Response = document.querySelector("input[name=q6]:checked")?.value || "";
  let q7Response = document.querySelector("input[name=q7]:checked")?.value || "";
  let q8Response = document.querySelector("#q8").value;
- let q9Response = (document.querySelector("#q9").value || "").trim().toLowerCase();
+ let q9Response = (document.querySelector("#q9Value").value || "").trim();
  console.log(q1Response);
 
  //checkboxes
@@ -152,12 +188,12 @@ function gradeQuiz(){
     wrongAnswer(8); 
     }
 
-  // NEW grading question 9
-    if (q9Response === "madrid") { 
-    rightAnswer(9); 
-    } else { 
-        wrongAnswer(9); 
-    }
+    //NEW grading question 9
+if (q9Response.toLowerCase() === "madrid") { 
+  rightAnswer(9); 
+} else { 
+  wrongAnswer(9); 
+}
 
   // NEW grading question 10
     if (q10Chile && q10Colombia && !q10CostaRica && !q10Cuba) {

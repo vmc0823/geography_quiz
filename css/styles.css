@@ -1,5 +1,8 @@
 body {
-  background: #f7fbff;
+  min-height: 100vh;                               
+  background:
+    linear-gradient(rgba(255,255,255,.25), rgba(255,255,255,.25)), 
+    url('img/background_pic.png') center / cover no-repeat;
 }
 
 h1 {
@@ -25,4 +28,62 @@ hr {
 img {
   height: 25px;
   vertical-align: middle;
+}
+
+#q6Choices .form-check {
+  padding-left: 0;          
+  text-align: left;
+  width: fit-content;
+}
+
+#q6Choices .form-check-input {
+  position: static;         
+  margin: 0 .5rem 0 0;      
+}
+
+#q7Choices .btn-check:checked + .btn {
+  transform: translateY(1px);
+  box-shadow: 0 0 0 .2rem rgba(13,110,253,.25);
+  font-weight: 600;
+}
+
+
+#q9Choices .q9btn {
+  /* size/geometry */
+  width: 140px;                 /* adjust to taste */
+  aspect-ratio: 1 / 1;          /* square => real diamond */
+  padding: 0 !important;        /* padding ruins the square */
+  display: grid !important;     /* center content inside */
+  place-items: center !important;
+
+  /* diamond shape */
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%) !important;
+  -webkit-clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%) !important;
+
+  border-radius: 0 !important;
+
+  /* visuals */
+  background-color: #fff !important;
+  border-width: 2px !important;
+  line-height: 1.1 !important;
+  transition: transform .08s ease, box-shadow .12s ease, background-color .12s ease;
+}
+
+#q9Choices .q9btn:hover {
+  box-shadow: 0 .35rem .9rem rgba(0,0,0,.12);
+}
+
+#q9Choices .q9btn:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 .2rem rgba(13,110,253,.35);
+}
+
+/* selected look */
+#q9Choices .q9btn.active {
+  background-color: rgba(13,110,253,.08) !important;
+  transform: translateY(1px);
+  box-shadow: 0 0 0 .2rem rgba(13,110,253,.25);
+  font-weight: 600;
+  /* optional: tighten text inside diamond a bit */
+  text-align: center;
 }

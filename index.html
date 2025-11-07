@@ -20,11 +20,10 @@
   <input type="text" id="q1">
   <br>
 	<div id="q1Feedback"></div>
-  <br>
+  <hr>
 
   <!-- Second Question -->
-	<h3><span id="markImg2"></span>2. What is the longest river?</h3>
-       
+	<h3><span id="markImg2"></span>2. What is the longest river?</h3> 
 	<select id="q2">
 		<option value="">Select One</option>
 		<option value="ms">Mississippi</option>
@@ -34,7 +33,7 @@
 	</select>
 	<br>
 	<div id="q2Feedback"></div>
-	<br>
+	<hr>
 
   <!-- Third Question -->
 	<h3><span id="markImg3"></span>3. What presidents are carved into mount Rushmore?</h3>
@@ -42,16 +41,16 @@
 	<input type="checkbox" id="Franklin"> <label for="Franklin"> B.Franklin </label>
 	<input type="checkbox" id="Jefferson"> <label for="Jefferson"> T. Jefferson </label>
 	<input type="checkbox" id="Roosevelt"> <label for="Roosevelt"> T. Roosevelt </label>
-	<br><br>
+	<br>
 	<div id="q3Feedback"></div>
-	<br><br>
+	<hr>
 
   <!-- Fourth Question -->
 	<h3><span id="markImg4"></span>4. What is the smallest US State?</h3>
   	<div id="q4Choices"></div>
-	<br>
+	
 	<div id="q4Feedback"></div> 
-    <br>
+	<hr>
 	
 	<!--new: fifth question-->
 	<h3><span id="markImg5"></span>5. Which country has the largest population in the world?</h3>
@@ -62,15 +61,15 @@
 
 	<!--new: sixth question-->
 	<h3><span id="markImg6"></span>6. What ocean is on the West Coast of Colombia?</h3>
-  	<div id="q6Choices"></div>
+  	<div id="q6Choices" class="d-flex flex-column align-items-center gap-1"></div>
   	<div id="q6Feedback"></div>
   	<hr>
 
 	<!--new: seventh question-->
 	<h3><span id="markImg7"></span>7. What ocean is on the East Coast of Colombia?</h3>
-  	<div id="q7Choices"></div>
-  	<div id="q7Feedback"></div>
-  	<hr>
+<div id="q7Choices" class="d-flex flex-wrap justify-content-center gap-2"></div>
+<div id="q7Feedback"></div>
+<hr>
 
 	<!--new: 8th question-->
 	<h3><span id="markImg8"></span>8. What is the name of the smallest country in the world?</h3>
@@ -87,10 +86,10 @@
 
 	<!--new: 9th question-->
 	<h3><span id="markImg9"></span>9. What is the capital of Spain?</h3>
-  	<label class="visually-hidden" for="q9">Capital of Spain</label>
-  	<input type="text" id="q9" class="form-control w-auto mx-auto" placeholder="your answer">
-  	<div id="q9Feedback" class="mt-2"></div>
-  	<hr>
+<div id="q9Choices" class="d-flex flex-wrap justify-content-center gap-2"></div>
+<input type="hidden" id="q9Value">
+<div id="q9Feedback" class="mt-2"></div>
+<hr>
 
 	<!--new: 10th question-->
 	<h3><span id="markImg10"></span>10. What are two South American Countries starting with a 'C'?</h3>
@@ -98,7 +97,7 @@
 	<input type="checkbox" id="Chile"> <label for="Chile"> Chile </label>
 	<input type="checkbox" id="CostaRica"> <label for="CostaRica"> Costa Rica </label>
 	<input type="checkbox" id="Colombia"> <label for="Colombia"> Colombia </label>
-	<br><br>
+	<br>
 	<div id="q10Feedback"></div>
 	<br>
 
@@ -110,9 +109,16 @@
 
 	<h2 id="totalScore" class="text-info">
 	</h2>
-	
+
 	<h3 id="totalAttempts">
 	</h3>
+
+	<footer class="site-footer">
+      <hr>
+      CST336 Internet Programming. 2025&copy; Waltman 
+      <p><strong>Disclaimer:</strong> This webpage is for educational purposes only.</p>
+      <img class="footer-logo" src="img/csumb_logo.png" alt="CSUMB logo" width="280">
+    </footer>
 
 	<script src="js/script.js"></script>
 
