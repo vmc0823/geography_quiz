@@ -55,29 +55,24 @@ function displayQ7Choices() {
 }
 
 function displayQ9Choices() {
-  let q9ChoicesArray = ["Madrid","Barcelona","Valencia","Seville"];
+  let q9ChoicesArray = ["Charlotte", "Raleigh", "Fayetteville", "Greensboro"]; 
   q9ChoicesArray = _.shuffle(q9ChoicesArray);
 
   const c = document.querySelector("#q9Choices");
   c.innerHTML = "";
   for (let i = 0; i < q9ChoicesArray.length; i++) {
     const val = q9ChoicesArray[i];
+    const id  = `q9-${val.replace(/\s+/g,"")}`;
+
     c.innerHTML += `
-      <button type="button" class="btn btn-outline-primary q9btn px-3" data-val="${val}">
-        🏰 ${val}
-      </button>
-    `;
+  <label class="card shadow-sm rounded-4 p-3 border-0 quiz-card-option">
+    <input type="radio" class="btn-check" name="q9" value="${val}" autocomplete="off">
+    <div class="h4 mb-1">🏰 ${val}</div>
+    <div class="text-muted small">Choose one</div>
+  </label>
+`;
   }
-
-  c.addEventListener("click", (e) => {
-    const btn = e.target.closest(".q9btn");
-    if (!btn) return;
-    c.querySelectorAll(".q9btn").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    document.querySelector("#q9Value").value = btn.dataset.val; // hidden input
-  });
 }
-
 
 function isFormValid(){
     let isValid= true;
@@ -118,14 +113,14 @@ function gradeQuiz(){
  let q6Response = document.querySelector("input[name=q6]:checked")?.value || "";
  let q7Response = document.querySelector("input[name=q7]:checked")?.value || "";
  let q8Response = document.querySelector("#q8").value;
- let q9Response = (document.querySelector("#q9Value").value || "").trim();
+ let q9Response = document.querySelector("input[name=q9]:checked")?.value || "";
  console.log(q1Response);
 
  //checkboxes
-   const q10Chile = document.querySelector("#Chile").checked;
-  const q10Colombia = document.querySelector("#Colombia").checked;
-  const q10CostaRica = document.querySelector("#CostaRica").checked;
-  const q10Cuba = document.querySelector("#Cuba").checked;
+  const q10Texas = document.querySelector("#Texas").checked;
+  const q10Alaska = document.querySelector("#Alaska").checked;
+  const q10PuertoRico = document.querySelector("#PuertoRico").checked;
+  const q10Hawaii = document.querySelector("#Hawaii").checked;
 
  //Grading question 1
     if (q1Response == "sacramento") {
@@ -161,7 +156,7 @@ function gradeQuiz(){
 	}
 
 // NEW grading question 5
-    if (q5Response === "china") { 
+    if (q5Response === "california") { 
     rightAnswer(5); 
     } else { 
     wrongAnswer(5); 
@@ -182,21 +177,21 @@ function gradeQuiz(){
     }
 
   // NEW grading question 8
-    if (q8Response === "Vatican City") { 
+    if (q8Response === "Wyoming") { 
     rightAnswer(8); 
     } else { 
     wrongAnswer(8); 
     }
 
     //NEW grading question 9
-if (q9Response.toLowerCase() === "madrid") { 
-  rightAnswer(9); 
-} else { 
-  wrongAnswer(9); 
-}
+  if (q9Response.toLowerCase() === "raleigh") { 
+    rightAnswer(9); 
+  } else { 
+    wrongAnswer(9); 
+  }
 
   // NEW grading question 10
-    if (q10Chile && q10Colombia && !q10CostaRica && !q10Cuba) {
+    if (q10Alaska && q10Hawaii && !q10PuertoRico && !q10Texas) {
         rightAnswer(10);
     } else {
         wrongAnswer(10);

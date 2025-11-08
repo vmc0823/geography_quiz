@@ -1,8 +1,20 @@
+html, body {
+  height: 100%;
+  margin: 0;              /* remove default margins */
+}
+
 body {
-  min-height: 100vh;                               
+  min-height: 100dvh;     /* fill viewport, handles mobile UI bars */
   background:
-    linear-gradient(rgba(255,255,255,.25), rgba(255,255,255,.25)), 
-    url('img/background_pic.png') center / cover no-repeat;
+    linear-gradient(rgba(255,255,255,.25), rgba(255,255,255,.25)),
+    url('../img/background_pic.png') center / cover no-repeat;
+}
+
+.page-bg {
+  min-height: 100dvh;
+  background:
+    linear-gradient(rgba(255,255,255,.25), rgba(255,255,255,.25)),
+    url('../img/background_pic.png') ;
 }
 
 h1 {
@@ -30,6 +42,10 @@ img {
   vertical-align: middle;
 }
 
+footer .footer-logo { 
+  height: 58px !important; width: auto; 
+}
+
 #q6Choices .form-check {
   padding-left: 0;          
   text-align: left;
@@ -48,42 +64,52 @@ img {
 }
 
 
-#q9Choices .q9btn {
-  /* size/geometry */
-  width: 140px;                 /* adjust to taste */
-  aspect-ratio: 1 / 1;          /* square => real diamond */
-  padding: 0 !important;        /* padding ruins the square */
-  display: grid !important;     /* center content inside */
-  place-items: center !important;
-
-  /* diamond shape */
-  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%) !important;
-  -webkit-clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%) !important;
-
-  border-radius: 0 !important;
-
-  /* visuals */
-  background-color: #fff !important;
-  border-width: 2px !important;
-  line-height: 1.1 !important;
-  transition: transform .08s ease, box-shadow .12s ease, background-color .12s ease;
+#q9Choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  align-items: stretch;
 }
 
-#q9Choices .q9btn:hover {
-  box-shadow: 0 .35rem .9rem rgba(0,0,0,.12);
+#q9Choices label.quiz-card-option {
+  cursor: pointer;
+  display: block;
+  border-radius: 1rem;
+  padding: 1rem;
+  background: #fff;
+  color: #222;
+  box-shadow: 0 .25rem .75rem rgba(0,0,0,.06);
+  border: 2px solid transparent;
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease,
+              background-color .12s ease, color .12s ease;
+  user-select: none;
 }
 
-#q9Choices .q9btn:focus-visible {
-  outline: 0;
-  box-shadow: 0 0 0 .2rem rgba(13,110,253,.35);
+#q9Choices label.quiz-card-option > input.btn-check {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
 }
 
-/* selected look */
-#q9Choices .q9btn.active {
-  background-color: rgba(13,110,253,.08) !important;
+#q9Choices label.quiz-card-option:not(:has(> input.btn-check:checked)):hover {
+  background: #6ec1df;            
+  transform: translateY(-1px);
+  box-shadow: 0 .4rem 1rem rgba(0,0,0,.10);
+}
+
+#q9Choices label.quiz-card-option:focus-within {
+  outline: none;
+  box-shadow: 0 0 0 .2rem rgba(13,110,253,.25), 0 .25rem .75rem rgba(0,0,0,.08);
+  border-color: rgba(13,110,253,.45);
+}
+
+#q9Choices label.quiz-card-option:has(> input.btn-check:checked) {
+  background: #6ec1df;            /* same as hover color */
+  color: #0b1b22;                 /* better contrast */
+  font-weight: 700;
   transform: translateY(1px);
-  box-shadow: 0 0 0 .2rem rgba(13,110,253,.25);
-  font-weight: 600;
-  /* optional: tighten text inside diamond a bit */
-  text-align: center;
+  box-shadow: 0 0 0 .2rem rgba(13,110,253,.25), 0 .25rem .75rem rgba(0,0,0,.08);
+  border-color: rgba(13,110,253,.55);
 }
